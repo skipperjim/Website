@@ -1,11 +1,22 @@
 var express = require('express');
 var router = express.Router();
 var sess;
+
 /* GET admin panel view. */
 router.get('/', function (req, res, next) {
-    res.render('admin', {
-        title: 'Admin Panel'
-    });
+    sess = req.session;
+    //Session set when user Request our app via URL
+    if (sess.email) {
+        /*
+         * This line check Session existence.
+         * If it existed will do some action.
+         */
+        res.render('admin', {
+            title: 'Admin Panel'
+        });
+    } else {
+        res.render('authfailed');
+    }
 });
 
 /*
