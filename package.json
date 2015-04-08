@@ -6,11 +6,20 @@
         "start": "node ./bin/www"
     },
     "dependencies": {
+        "jade": "*",
+        "mongodb": "^1.4",
+        "mongoskin": "*",
+        "connect-mongo": "^0.8.0",
+        "morgan": "^1.5.2",
+        "phaser": "latest",
+        "serve-favicon": "*",
+        "socket.io": "latest",
         "bcrypt-nodejs": "^0.0.3",
         "body-parser": "~1.0.0",
         "cookie-parser": "^1.3.4",
         "debug": "^0.7.4",
         "express": "^4.12.3",
+        "express-session": "^1.10.4",
         "grunt": "^0.4.5",
         "grunt-contrib-concat": "^0.4.0",
         "grunt-contrib-jshint": "^0.10.0",
@@ -18,12 +27,5 @@
         "grunt-contrib-qunit": "^0.5.2",
         "grunt-contrib-uglify": "^0.5.0",
         "grunt-contrib-watch": "^0.6.1",
-        "jade": "*",
-        "mongodb": "^1.4",
-        "mongoskin": "*",
-        "morgan": "^1.5.2",
-        "phaser": "latest",
-        "serve-favicon": "*",
-        "socket.io": "latest"
     }
 }

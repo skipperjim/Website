@@ -10,6 +10,9 @@ var mongo = require('mongoskin');
 var db = mongo.db("mongodb://localhost:27017/GuffawSite", {
     native_parser: true
 });
+// Session
+var session = require('express-session');
+var MongoStore = require('connect-mongo')(session);
 
 var routes = require('./routes/index');
 var game = require('./routes/game');
@@ -18,15 +21,10 @@ var admin = require('./routes/admin');
 
 var app = express();
 
-//////////////////////////////////////////////////////////////////
 var port = 3700;
 var io = require('socket.io').listen(app.listen(port));
 var fs = require('fs');
 console.log("Listening on port " + port);
-
-/*app.get('/', function (req, res) {
-    res.sendFile(__dirname + '/build/index.html');
-});*/
 
 io.sockets.on('connection', function (socket) {
     socket.emit('message', {
@@ -36,7 +34,6 @@ io.sockets.on('connection', function (socket) {
         io.sockets.emit('message', data);
     });
 });
-//////////////////////////////////////////////////////////////////
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -49,7 +46,15 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-//app.use(express.static(path.join(__dirname, 'build')));
+
+app.use(session({
+    secret: 'foofoo',
+    store: new MongoStore({
+        db: "GuffawSite",
+        autoRemove: 'interval',
+        autoRemoveInterval: 10 // in minutes
+    })
+}));
 
 // Make bcrypt available to our router
 app.use(function (req, res, next) {

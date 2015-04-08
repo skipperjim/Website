@@ -1,7 +1,7 @@
 window.onload = function () {
 
     var messages = [];
-    var socket = io.connect('http://localhost:3000');
+    var socket = io.connect('http://localhost:3700');
     var chatmsg = document.getElementById("chatmsg");
     var sendButton = document.getElementById("sendmsg");
     var content = document.getElementById("chatoutput");

@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-
+var sess;
 /* GET admin panel view. */
 router.get('/', function (req, res, next) {
     res.render('admin', {
@@ -23,10 +23,8 @@ router.get('/userlist', function (req, res) {
  */
 router.post('/adduser', function (req, res) {
     var encrypt = req.crypto;
-    console.log("Encrypting " + req.body.password);
     var hashedpass = encrypt.hashSync(req.body.password);
     req.body.password = hashedpass;
-    console.log("HASH:: " + req.body.password);
     var db = req.db;
     db.collection('userlist').insert(req.body, function (err, result) {
         res.send(
