@@ -43,8 +43,8 @@ function doLogin(event) {
         $.ajax({
             type: 'POST',
             data: loginUser,
-            url: '/admin/login',
-            dataType: 'JSON'
+            //dataType: 'JSON',
+            url: '/admin/login'
         }).done(function (response) {
             console.log("DONE WITH AJAX LOGIN..");
             // Check for successful (blank) response
@@ -58,7 +58,11 @@ function doLogin(event) {
                 // If something goes wrong, alert the error message that our service returned
                 alert('Error: ' + response.msg);
             }
-        });
+        }).fail(function (response) {
+            $("#loginForm").append("<p>WTF it didn't work.</p>");
+            console.log("WTF it didn't work again.");
+            console.log(response);
+        })
         console.log("doLogin() end");
     } else {
         // If errorCount is more than 0, error out

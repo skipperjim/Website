@@ -25,21 +25,32 @@ router.get('/panel', function (req, res, next) {
 });
 
 router.post('/login', function (req, res) {
+    console.log(req.body);
     var db = req.db;
-    console.log("admin/login POST!");
-    doLogin();
-    res.send(
-        (err === null) ? {
+    console.log("admin/login POST!!");
+    console.log(next);
+    if (req.body.username === "skipperjim" && req.body.password === "baseball") {
+        console.log("CREDENTIALS MATCH!");
+        res.send({
             msg: ''
-        } : {
-            msg: err
-        }
-    );
+        });
+    }
+});
+router.get('/login/:username/:password', function (req, res) {
+    console.log(req.body);
+    var db = req.db;
+    console.log("admin/login POST!!");
+    console.log(next);
+    if (req.body.username === "skipperjim" && req.body.password === "baseball") {
+        console.log("CREDENTIALS MATCH!");
+        res.send({
+            msg: ''
+        });
+    }
 });
 router.doLogin = function (req, res, next) {
     console.log("doLogin called");
 };
-
 router.get('/logout', function (req, res) {
     req.session.destroy(function (err) {
         if (err) {
