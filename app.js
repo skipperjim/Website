@@ -40,13 +40,14 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
 app.use(session({
+    saveUninitialized: false, // don't create session until something stored
+    resave: false,
     secret: 'foofoo',
-    store: new MongoStore({
-        db: "GuffawSite",
-        autoRemove: 'interval',
-        autoRemoveInterval: 10 // in minutes
-    })
+    cookie: {
+        maxAge: 60000
+    }
 }));
+
 // uncomment after placing your favicon in /public
 //app.use(favicon(__dirname + '/public/favicon.ico'));
 app.use(logger('dev'));

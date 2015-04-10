@@ -7,6 +7,8 @@ $(document).ready(function () {
     // Username link click
     $('#userList table tbody').on('click', 'td a.linkshowuser', showUserInfo);
 
+    // Login button
+    $('#btnLogin').on('click', doLogin);
     // Add User button click
     $('#btnAddUser').on('click', addUser);
 
@@ -19,7 +21,51 @@ $(document).ready(function () {
 });
 
 // Functions =============================================================
-
+// Login functionality
+function doLogin(event) {
+    console.log("doLogin() start");
+    event.preventDefault();
+    var errorCount = 0;
+    $('#loginForm input').each(function (index, val) {
+        if ($(this).val() === '') {
+            errorCount++;
+        }
+    });
+    // Check and make sure errorCount's still at zero
+    if (errorCount === 0) {
+        // If it is, compile all user info into one object
+        var loginUser = {
+            'username': $('#loginForm input#inputUserName').val(),
+            'password': $('#loginForm input#inputUserPassword').val()
+        }
+        console.log(loginUser);
+        // Use AJAX to post the object to our adduser service
+        $.ajax({
+            type: 'POST',
+            data: loginUser,
+            url: '/admin/login',
+            dataType: 'JSON'
+        }).done(function (response) {
+            console.log("DONE WITH AJAX LOGIN..");
+            // Check for successful (blank) response
+            if (response.msg === '') {
+                console.log("..success!");
+                response.render('panel', {
+                    title: 'Admin Panel'
+                });
+            } else {
+                console.log("..failed :(");
+                // If something goes wrong, alert the error message that our service returned
+                alert('Error: ' + response.msg);
+            }
+        });
+        console.log("doLogin() end");
+    } else {
+        // If errorCount is more than 0, error out
+        alert('Please fill in all fields');
+        return false;
+    }
+};
 // Fill table with data
 function populateTable() {
     // Empty content string
@@ -43,7 +89,6 @@ function populateTable() {
         $('#userList table tbody').html(tableContent);
     });
 };
-
 // Show User Info
 function showUserInfo(event) {
 
@@ -68,11 +113,9 @@ function showUserInfo(event) {
     $('#userInfoLocation').text(thisUserObject.location);
 
 };
-
 // Add User
 function addUser(event) {
     event.preventDefault();
-
     // Super basic validation - increase errorCount variable if any fields are blank
     var errorCount = 0;
     $('#addUser input').each(function (index, val) {
@@ -80,43 +123,35 @@ function addUser(event) {
             errorCount++;
         }
     });
-
     // Check and make sure errorCount's still at zero
     if (errorCount === 0) {
-
         // If it is, compile all user info into one object
         var newUser = {
-            'username': $('#addUser fieldset input#inputUserName').val(),
-            'email': $('#addUser fieldset input#inputUserEmail').val(),
-            'password': $('#addUser fieldset input#inputUserPassword').val()
-        }
-
-        // Use AJAX to post the object to our adduser service
+                'username': $('#addUser fieldset input#inputUserName').val(),
+                'email': $('#addUser fieldset input#inputUserEmail').val(),
+                'password': $('#addUser fieldset input#inputUserPassword').val()
+            }
+            // Use AJAX to post the object to our adduser service
         $.ajax({
-            type: 'POST',
+            type: 'PUT',
             data: newUser,
             url: '/admin/adduser',
             dataType: 'JSON'
         }).done(function (response) {
-
             // Check for successful (blank) response
             if (response.msg === '') {
-
                 // Clear the form inputs
                 $('#addUser fieldset input').val('');
-
                 // Update the table
                 populateTable();
-
             } else {
-
                 // If something goes wrong, alert the error message that our service returned
                 alert('Error: ' + response.msg);
-
             }
         });
     } else {
         // If errorCount is more than 0, error out
+        console.log('Please fill in all fields');
         alert('Please fill in all fields');
         return false;
     }

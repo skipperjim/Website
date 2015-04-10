@@ -4,34 +4,60 @@ var sess;
 
 /* GET admin panel view. */
 router.get('/', function (req, res, next) {
+    console.log("LOAD ADMIN PAGE");
     sess = req.session;
     //Session set when user Request our app via URL
-    if (sess.email) {
-        /*
-         * This line check Session existence.
-         * If it existed will do some action.
-         */
+    if (sess.username) {
         res.render('admin', {
             title: 'Admin Panel'
         });
     } else {
-        res.render('authfailed');
+        res.render('login');
     }
 });
 
-/*
- * GET userlist.
- */
+/* GET admin panel view. */
+router.get('/panel', function (req, res, next) {
+    console.log("LOAD ADMIN PANEL");
+    res.render('admin', {
+        title: 'Admin Panel'
+    });
+});
+
+router.post('/login', function (req, res) {
+    var db = req.db;
+    console.log("admin/login POST!");
+    doLogin();
+    res.send(
+        (err === null) ? {
+            msg: ''
+        } : {
+            msg: err
+        }
+    );
+});
+router.doLogin = function (req, res, next) {
+    console.log("doLogin called");
+};
+
+router.get('/logout', function (req, res) {
+    req.session.destroy(function (err) {
+        if (err) {
+            console.log(err);
+        } else {
+            res.redirect('/');
+        }
+    });
+
+});
+// GET userlist.
 router.get('/userlist', function (req, res) {
     var db = req.db;
     db.collection('userlist').find().toArray(function (err, items) {
         res.json(items);
     });
 });
-
-/*
- * POST to adduser.
- */
+// POST to adduser.
 router.post('/adduser', function (req, res) {
     var encrypt = req.crypto;
     var hashedpass = encrypt.hashSync(req.body.password);
@@ -62,18 +88,5 @@ router.delete('/deleteuser/:id', function (req, res) {
         });
     });
 });
-
-/*
-bcrypt.hash("bacon", null, null, function (err, hash) {
-    // Store hash in your password DB.
-});
-// Load hash from your password DB.
-bcrypt.compare("bacon", hash, function (err, res) {
-    // res == true
-});
-bcrypt.compare("veggies", hash, function (err, res) {
-    // res = false
-});
-*/
 
 module.exports = router;

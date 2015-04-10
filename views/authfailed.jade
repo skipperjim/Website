@@ -4,3 +4,12 @@ block content
     div.container
         h1 You gotta have administrator rights to view this page, bro.
         p Try logging in first.
+        
+        div#loginForm
+        label Username:
+        input#inputUserName.span3(type="text", placeholder="Enter your username")
+        label Password:
+        input#inputUserPassword.span3(type="password")
+        br
+        //input.btn(type="submit", value="Login")
+        button#btnLogin Login

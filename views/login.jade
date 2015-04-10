@@ -1,11 +1,13 @@
 extends layout
 
 block content
-    h1 Login
-    div.content
-      form.form-horizontal(method="post", id="loginForm")
-        label Username
-        input.span3(id="username", type="text", name="User", placeholder="Enter your username")
-        label Password
-        input.span3(id="password", type="password", name="Password")
-        input.btn(type="submit", value="Log In")
+    div.container
+        h1 You gotta have administrator rights to view this page, bro.
+        p Try logging in first.
+        div#loginForm
+            label Username:
+            input#inputUserName.span3(type="text", placeholder="Enter your username")
+            label Password:
+            input#inputUserPassword.span3(type="password")
+            br
+            button#btnLogin Login
