@@ -1,13 +1,16 @@
 extends layout
 
 block content
-    div.container
-        h1 You gotta have administrator rights to view this page, bro.
-        p Try logging in first.
-        div#loginForm
-            label Username:
-            input#inputUserName.span3(type="text", placeholder="Enter your username")
-            label Password:
-            input#inputUserPassword.span3(type="password")
-            br
-            button#btnLogin Login
+    .container
+        h1 You gotta login, bruh.
+        p.lead Or don't. It doesn't matter.
+        br
+        form(role='form', action="/login",method="post", style='max-width: 300px;')
+            .form-group
+                input.form-control(type='text', name="username", placeholder='Enter Username')
+                .form-group
+                input.form-control(type='password', name="password", placeholder='Password')
+                button.btn.btn-default(type='submit') Submit
+                &nbsp;
+                a(href='/')
+                    button.btn.btn-primary(type="button") Cancel

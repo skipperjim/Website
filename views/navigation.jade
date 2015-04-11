@@ -1,0 +1,14 @@
+//- Navbar with dropdowns, default color
++nav("Guffaw", "dropdown_menu")
+    +nav_item( "/" ) Home
+    +nav_item( "/dexter" ) Dexter
+    +nav_item( "/game" ) Game
+    +nav_item( "/admin" ) Admin
+    +nav_item_dropdown( "#" )( label="Dropdown")
+        +nav_item( "#" ) Action
+        +nav_item( "#" ) Another action
+        +nav_item( "#" ) Something else here
+        +nav_divider
+        +nav_header Nav header
+        +nav_item( "#" ) Separated link
+        +nav_item( "#" ) One more separated link

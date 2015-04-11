@@ -6,22 +6,15 @@ var sess;
 router.get('/', function (req, res, next) {
     console.log("LOAD ADMIN PAGE");
     sess = req.session;
+    console.log(sess.User);
     //Session set when user Request our app via URL
-    if (sess.username) {
+    if (sess.User) {
         res.render('admin', {
             title: 'Admin Panel'
         });
     } else {
-        res.render('login');
+        res.render('authfailed');
     }
-});
-
-/* GET admin panel view. */
-router.get('/panel', function (req, res, next) {
-    console.log("LOAD ADMIN PANEL");
-    res.render('admin', {
-        title: 'Admin Panel'
-    });
 });
 
 router.post('/login', function (req, res) {

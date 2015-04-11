@@ -45,15 +45,6 @@ io.sockets.on('connection', function (socket) {
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
-app.use(session({
-    saveUninitialized: false, // don't create session until something stored
-    resave: false,
-    secret: 'foofoo',
-    cookie: {
-        maxAge: 60000
-    }
-}));
-
 // uncomment after placing your favicon in /public
 //app.use(favicon(__dirname + '/public/favicon.ico'));
 app.use(logger('dev'));
@@ -62,6 +53,13 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 app.use(cookieParser());
+app.use(require('express-session')({
+    secret: 'keyboard evee nunu',
+    resave: false,
+    saveUninitialized: false
+}));
+app.use(passport.initialize());
+app.use(passport.session());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Make bcrypt available to our router
@@ -83,13 +81,22 @@ app.use('/users', users);
 app.use('/form', form);
 app.use('/create', form);
 
+// Database Models
+//
+// passport config
+var Account = require('./models/account');
+passport.use(new LocalStrategy(Account.authenticate()));
+passport.serializeUser(Account.serializeUser());
+passport.deserializeUser(Account.deserializeUser());
+
+
+/////////////////////////////////////////////
 /// catch 404 and forwarding to error handler
 app.use(function (req, res, next) {
     var err = new Error('Not Found');
     err.status = 404;
     next(err);
 });
-
 /// error handlers ///
 // development error handler
 // will print stacktrace
@@ -103,7 +110,6 @@ if (app.get('env') === 'development') {
         });
     });
 }
-
 // production error handler
 // no stacktraces leaked to user
 app.use(function (err, req, res, next) {
