@@ -5,11 +5,16 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var bcrypt = require('bcrypt-nodejs');
+// mongoose config
+require('./database');
 // Database
 var mongo = require('mongoskin');
 var db = mongo.db("mongodb://localhost:27017/GuffawSite", {
     native_parser: true
 });
+// Authentication
+var passport = require('passport');
+var LocalStrategy = require('passport-local').Strategy;
 // Session
 var session = require('express-session');
 var MongoStore = require('connect-mongo')(session);
@@ -18,9 +23,10 @@ var routes = require('./routes/index');
 var game = require('./routes/game');
 var dexter = require('./routes/dexter');
 var admin = require('./routes/admin');
+var users = require('./routes/users');
+var form = require('./routes/form');
 
 var app = express();
-
 var port = 3700;
 var io = require('socket.io').listen(app.listen(port));
 var fs = require('fs');
@@ -73,6 +79,9 @@ app.use('/', routes);
 app.use('/game', game);
 app.use('/dexter', dexter);
 app.use('/admin', admin);
+app.use('/users', users);
+app.use('/form', form);
+app.use('/create', form);
 
 /// catch 404 and forwarding to error handler
 app.use(function (req, res, next) {
