@@ -4,7 +4,7 @@ block content
     div.container
         h1 You gotta have administrator rights to view this page, bro.
         if(!user)
-            a(href="/login") Login
+            include login
         if(user)
             p You are currently logged in as #{user.username}
             a(href="/logout") Logout

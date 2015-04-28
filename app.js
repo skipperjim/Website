@@ -5,6 +5,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var bcrypt = require('bcrypt-nodejs');
+var ENV = process.env.NODE_ENV || 'development';
 // mongoose config
 require('./database');
 // Database
@@ -25,6 +26,7 @@ var dexter = require('./routes/dexter');
 var admin = require('./routes/admin');
 var users = require('./routes/users');
 var form = require('./routes/form');
+var chat = require('./routes/chat');
 
 var app = express();
 var port = 3700;
@@ -80,6 +82,7 @@ app.use('/admin', admin);
 app.use('/users', users);
 app.use('/form', form);
 app.use('/create', form);
+app.use('/chat', chat);
 
 // Database Models
 //

@@ -4,13 +4,16 @@
     "private": true,
     "scripts": {
         "start": "supervisor ./bin/www",
-        "test": "make.exe test"
+        "test": "set DEBUG=express:* & node app.js"
     },
     "repository": {
         "type": "git",
         "url": "https://github.com/skipperjim/Website.git"
     },
-    "author": "Steven Gray",
+    "author": {
+        "name": "Steven Gray",
+        "email": "sgrayjr289@gmail.com"
+    },
     "dependencies": {
         "bcrypt-nodejs": "^0.0.3",
         "body-parser": "~1.0.0",

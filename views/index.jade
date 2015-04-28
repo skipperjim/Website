@@ -5,8 +5,7 @@ block content
         h1 Welcome to my website, Guffaw.
         p This is going to become my portfolio site, along with every other idea I can think of and can develop.
         if(!user)
-            a(href="/login") Login
-            br
+            include login
             a(href="/register") Register
         if(user)
             p You are currently logged in as #{user.username}
