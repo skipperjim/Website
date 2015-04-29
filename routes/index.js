@@ -24,7 +24,7 @@ router.post('/register', function (req, res) {
     }), req.body.password, function (err, account) {
         if (err) {
             return res.render("register", {
-                info: "Sorry. That username already exists. Try again."
+                info: "Sorry. That username already exists. Try another one."
             });
         }
 

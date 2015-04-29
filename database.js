@@ -7,4 +7,4 @@ var Comment = new Schema({
 
 mongoose.model('comments', Comment);
 
-mongoose.connect('mongodb://localhost/GuffawSite');
+mongoose.connect('mongodb://localhost/ClonedWebsite');

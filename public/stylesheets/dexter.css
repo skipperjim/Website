@@ -1,0 +1,27 @@
+html {
+    background: url(/images/dexter_background_06.jpg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    /*overflow: hidden;*/
+}
+
+body {
+    background-color: transparent !important;
+}
+
+h1,
+h2,
+h3,
+h4,
+p,
+small {
+    color: #ffffff !important;
+}
+
+footer {
+    background-color: #121212 !important;
+}
+
+div.videoContainer {}
