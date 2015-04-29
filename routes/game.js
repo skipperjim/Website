@@ -4,15 +4,16 @@ var router = express.Router();
 /* GET game canvas view. */
 router.get('/', function (req, res, next) {
     res.render('game', {
-        title: 'Intension: Space'
+        title: 'Intension: Space game'
     });
 });
 
-router.get('/absoluterror', function (req, res) {
-    res.sendFile('public/index.html');
+router.get('/1', function (req, res) {
+    res.render('game', {});
+    //res.sendFile('public/index.html');
 });
 
-router.get('/game', function (req, res) {
+router.get('/space', function (req, res) {
     res.sendFile(__dirname + '/game');
 });
 
