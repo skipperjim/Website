@@ -8,7 +8,7 @@ router.get('/', function (req, res, next) {
     sess = req.session;
     console.log(sess.User);
     //Session set when user Request our app via URL
-    if (sess.User) {
+    if (sess.User && sess.User["role"] === "Admin") {
         res.render('admin', {
             title: 'Admin Panel'
         });
@@ -21,13 +21,13 @@ router.post('/login', function (req, res) {
     console.log(req.body);
     var db = req.db;
     console.log("admin/login POST!!");
-    console.log(next);
-    if (req.body.username === "skipperjim" && req.body.password === "baseball") {
+    res.render('/');
+    /*if (req.body.username === "skipperjim" && req.body.password === "baseball") {
         console.log("CREDENTIALS MATCH!");
         res.send({
             msg: ''
         });
-    }
+    }*/
 });
 router.get('/login/:username/:password', function (req, res) {
     console.log(req.body);
@@ -44,15 +44,29 @@ router.get('/login/:username/:password', function (req, res) {
 router.doLogin = function (req, res, next) {
     console.log("doLogin called");
 };
-router.get('/logout', function (req, res) {
+router.post('/logout', function (req, res) {
+    console.log("POST logout");
     req.session.destroy(function (err) {
         if (err) {
             console.log(err);
         } else {
+            console.log("LOGOUT ELSE");
             res.redirect('/');
         }
     });
+});
 
+router.get('/logout', function (req, res) {
+    console.log("GET logout");
+    req.session.destroy(function (err) {
+        if (err) {
+            console.log(err);
+        } else {
+            console.log("LOGOUT ELSE");
+            console.log(req.session.User);
+            res.redirect('/');
+        }
+    });
 });
 // GET userlist.
 router.get('/userlist', function (req, res) {

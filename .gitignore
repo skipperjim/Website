@@ -4,3 +4,4 @@ data/
 public/game/*
 node_modules/
 npm-debug.log
+database.js

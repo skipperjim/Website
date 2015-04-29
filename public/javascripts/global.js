@@ -9,6 +9,7 @@ $(document).ready(function () {
 
     // Login button
     $('#btnLogin').on('click', doLogin);
+    $('#btnLogout').on('click', doLogout);
     // Add User button click
     $('#btnAddUser').on('click', addUser);
 
@@ -46,6 +47,7 @@ function doLogin(event) {
             //dataType: 'JSON',
             url: '/admin/login'
         }).done(function (response) {
+            console.log(response);
             console.log("DONE WITH AJAX LOGIN..");
             // Check for successful (blank) response
             if (response.msg === '') {
@@ -62,13 +64,36 @@ function doLogin(event) {
             $("#loginForm").append("<p>WTF it didn't work.</p>");
             console.log("WTF it didn't work again.");
             console.log(response);
-        })
+        });
         console.log("doLogin() end");
     } else {
         // If errorCount is more than 0, error out
         alert('Please fill in all fields');
         return false;
     }
+};
+
+function doLogout(event) {
+    console.log("LOGGING OUT!");
+    $.ajax({
+        type: 'POST',
+        data: {},
+        //dataType: 'JSON',
+        url: '/admin/logout'
+    }).done(function (response) {
+        console.log("DONE WITH AJAX LOGOUT..");
+        // Check for successful (blank) response
+        if (response.msg === '') {
+            console.log("..success!");
+            response.render('/', {
+                title: 'Home!'
+            });
+        }
+    }).fail(function (response) {
+        $("#loginForm").append("<p>WTF it didn't work.</p>");
+        console.log("WTF it didn't work again.");
+        console.log(response);
+    });
 };
 // Fill table with data
 function populateTable() {
