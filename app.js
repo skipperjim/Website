@@ -1,4 +1,6 @@
 var express = require('express');
+var http = require('http');
+var https = require('https');
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
@@ -28,11 +30,19 @@ var users = require('./routes/users');
 var form = require('./routes/form');
 var chat = require('./routes/chat');
 
-var app = express();
-var port = 3700;
-var io = require('socket.io').listen(app.listen(port));
 var fs = require('fs');
-console.log("Listening on port " + port);
+// SSL Variables
+var privateKey = fs.readFileSync('sslcert/server.key', 'utf8');
+var certificate = fs.readFileSync('sslcert/server.crt', 'utf8');
+var credentials = {
+    key: privateKey,
+    cert: certificate
+};
+var app = express();
+var httpServer = createServer(app).listen(80);
+var httpsServer = createServer(credentials, app).listen(443);
+var io = require('socket.io').listen(app.listen(3700));
+console.log("Listening on ports 80, 443, 3700");
 
 io.sockets.on('connection', function (socket) {
     socket.emit('message', {
