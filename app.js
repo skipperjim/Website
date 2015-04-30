@@ -92,6 +92,12 @@ passport.use(new LocalStrategy(Account.authenticate()));
 passport.serializeUser(Account.serializeUser());
 passport.deserializeUser(Account.deserializeUser());
 
+app.get('*', function (req, res, next) {
+    // put user into res.locals for easy access from templates
+    res.locals.user = req.user || null;
+    //res.locals.loggedIn = (req.user) ? true : false;
+    next();
+});
 
 /////////////////////////////////////////////
 /// catch 404 and forwarding to error handler

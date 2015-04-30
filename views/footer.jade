@@ -1,5 +1,10 @@
 footer.footer(style='position: fixed; bottom: 0; left: 0; width: 100%;')
-    if(!user)
-        h3 Login and then you can chat with others on the site
-    if(user)
-        include chat
+    div.footContainer
+        if(user)
+            include chat
+        else
+            h4 Login and then you can chat with others:
+            form(role='form', action="/login",method="post", style='max-width: 300px;')
+                input(type='text', name="username", placeholder='Enter Username')
+                input(type='password', name="password", placeholder='Password')
+                button.btn.btn-default.btn-xs(type='submit') Login

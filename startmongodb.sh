@@ -1,13 +1,16 @@
 ## Start MongoDB Server
 cd C:\Users\sgray\Programs\MongoDB\bin
-mongod --dbpath c:\Users\sgray\workspace\GuffawSite\data
+mongod --dbpath c:\Users\sgray\workspace\ClonedWebsite\data
 
 
 ## Connect to MongoDB Server
 cd C:\Users\sgray\Programs\MongoDB\bin
-mongo GuffawSite
+mongo ClonedWebsite
+> use ClonedWebsite
 
-> use MongoSite2
+## Start MongoDB Web Frontend port 8081
+C:\Users\sgray\workspace\node_modules\mongo-express
+node app.js
 
 ## Query database collection 'usercollection' - collections are made automatically
 db.userlist.find().pretty()

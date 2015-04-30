@@ -16,6 +16,7 @@ h2,
 h3,
 h4,
 p,
+b,
 small {
     color: #ffffff !important;
 }
@@ -25,3 +26,12 @@ footer {
 }
 
 div.videoContainer {}
+
+div#chatoutput {
+    width: 100%;
+    height: 100px;
+    margin: 0 none;
+    border: solid 1px #999;
+    overflow-y: scroll;
+    color: #ffffff;
+}

@@ -4,11 +4,15 @@ var sess;
 
 /* GET admin panel view. */
 router.get('/', function (req, res, next) {
+    console.log("$$$$$$$$ router GET chat.js");
     sess = req.session;
     //Session set when user Request our app via URL
     if (sess.User) {
+        res.render('chat', {
+            user: req.user
+        });
         var messages = [];
-var socket = io.connect('http://localhost:3700');
+        var socket = io.connect('http://localhost:3700');
         var chatmsg = document.getElementById("chatmsg");
         var sendButton = document.getElementById("sendmsg");
         var content = document.getElementById("chatoutput");
@@ -27,7 +31,6 @@ var socket = io.connect('http://localhost:3700');
                 console.log("There is a problem:", data);
             }
         });
-
         sendButton.onclick = sendMessage = function () {
             if (chatmsg.value == "") {
                 alert("Please type your name!");
@@ -40,7 +43,6 @@ var socket = io.connect('http://localhost:3700');
                 chatmsg.value = "";
             }
         };
-
         $("#chatmsg").keyup(function (e) {
             if (e.keyCode == 13) {
                 sendMessage();
