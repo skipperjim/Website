@@ -4,4 +4,7 @@ data/
 node_modules/
 npm-debug.log
 database.js
+<<<<<<< HEAD
 private/
+=======
+>>>>>>> afc14e91fd504e73f74f00e84ee724d05392d4a9
