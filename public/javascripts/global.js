@@ -17,7 +17,7 @@ $(document).ready(function () {
     $('#userList table tbody').on('click', 'td a.linkdeleteuser', deleteUser);
 
     // Populate the user table on initial page load
-    populateTable();
+    //populateTable();
 
 });
 
