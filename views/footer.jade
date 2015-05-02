@@ -3,8 +3,12 @@ footer.footer(style='position: fixed; bottom: 0; left: 0; width: 100%;')
         if(user)
             include chat
         else
-            h4 Login and then you can chat with others:
-            form(role='form', action="/login",method="post", style='max-width: 300px;')
-                input(type='text', name="username", placeholder='Enter Username')
-                input(type='password', name="password", placeholder='Password')
-                button.btn.btn-default.btn-xs(type='submit') Login
+            h4 Login and you can chat with others:
+            form.form-inline(role='form', action="/login",method="post")
+                div.form-group.input-group-sm
+                    label.sr-only Username
+                    input.form-control(type='text', name="username", placeholder='Enter Username')
+                div.form-group.input-group-sm
+                    label.sr-only Password
+                    input.form-control(type='password', name="password", placeholder='Password')
+                button.btn.btn-default.btn-sm(type='submit') Login

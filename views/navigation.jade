@@ -4,6 +4,10 @@
     +nav_item( "/dexter" ) Dexter
     +nav_item( "/game/space" ) Game
     +nav_item( "/admin" ) Admin
+    if(user)
+        +nav_item( "/logout" ) Logout
+    else
+        +nav_item( "/Register" ) Register
     //-+nav_item_dropdown( "#" )( label="Dropdown")
         +nav_item( "#" ) Action
         +nav_item( "#" ) Another action
