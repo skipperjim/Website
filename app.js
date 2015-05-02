@@ -12,7 +12,7 @@ var ENV = process.env.NODE_ENV || 'development';
 require('./database');
 // Database
 var mongo = require('mongoskin');
-var db = mongo.db("mongodb://localhost:27017/ClonedWebsite", {
+var db = mongo.db("mongodb://localhost:27017/guffaw.co", {
     native_parser: true
 });
 // Authentication
@@ -32,15 +32,16 @@ var chat = require('./routes/chat');
 
 var fs = require('fs');
 // SSL Variables
-var privateKey = fs.readFileSync('sslcert/server.key', 'utf8');
-var certificate = fs.readFileSync('sslcert/server.crt', 'utf8');
+var privateKey = fs.readFileSync('private/server.key', 'utf8');
+var certificate = fs.readFileSync('private/server.crt', 'utf8');
 var credentials = {
     key: privateKey,
-    cert: certificate
+    cert: certificate,
+    pass: "Metaridley69"
 };
 var app = express();
-var httpServer = createServer(app).listen(80);
-var httpsServer = createServer(credentials, app).listen(443);
+var httpServer = http.createServer(app).listen(80);
+var httpsServer = https.createServer(credentials, app).listen(443);
 var io = require('socket.io').listen(app.listen(3700));
 console.log("Listening on ports 80, 443, 3700");
 
