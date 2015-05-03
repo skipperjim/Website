@@ -32,16 +32,16 @@ var chat = require('./routes/chat');
 
 var fs = require('fs');
 // SSL Variables
-var privateKey = fs.readFileSync('private/server.key', 'utf8');
-var certificate = fs.readFileSync('private/server.crt', 'utf8');
-var credentials = {
+//var privateKey = fs.readFileSync('private/server.key', 'utf8');
+//var certificate = fs.readFileSync('private/server.crt', 'utf8');
+/*var credentials = {
     key: privateKey,
     cert: certificate,
-    pass: "Metaridley69"
-};
+    pass: "9"
+};*/
 var app = express();
 var httpServer = http.createServer(app).listen(80);
-var httpsServer = https.createServer(credentials, app).listen(443);
+//var httpsServer = https.createServer(credentials, app).listen(443);
 var io = require('socket.io').listen(app.listen(3700));
 console.log("Listening on ports 80, 443, 3700");
 
