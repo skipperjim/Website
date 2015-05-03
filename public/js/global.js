@@ -18,7 +18,24 @@ $(document).ready(function () {
 
     // Populate the user table on initial page load
     //populateTable();
-
+    if ($("#canvas")) {
+        var canvas = document.getElementById('canvas');
+        var canvasW = 640;
+        var canvasH = 480;
+        if (canvas && canvas.getContext) {
+            context = canvas.getContext('2d');
+            canvas.width = document.body.clientWidth; //document.width is obsolete
+            canvas.height = document.body.clientHeight; //document.height is obsolete
+            canvasW = canvas.width;
+            canvasH = canvas.height;
+            // drawing code here
+            $.getScript("js/draw.js", function (data, textStatus, jqxhr) {
+                console.log("Load was performed.");
+            });
+        } else {
+            // canvas-unsupported code here
+        }
+    }
 });
 
 // Functions =============================================================

@@ -4,15 +4,16 @@ block append head
     link(rel='stylesheet', href='/css/dexter.css')
 
 block content
-    h1= title
-    
-    div.videoContainer
-        video(width="auto", height="auto", controls)
-            source(src="/videos/dexter/0001.mp4", type="video/mp4")
-            source(src="/videos/dexter/0001.ogg", type="video/ogg")
-            |Your browser does not support the video tag.
+    div.container
+        h1= title
 
-    // Wrapper
-    #wrapper
-        
-    // /WRAPPER
+        div.videoContainer
+            video(width="auto", height="auto", controls)
+                source(src="/videos/dexter/0001.mp4", type="video/mp4")
+                source(src="/videos/dexter/0001.ogg", type="video/ogg")
+                |Your browser does not support the video tag.
+
+        // Wrapper
+        #wrapper
+
+        // /WRAPPER

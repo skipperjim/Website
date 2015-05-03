@@ -2,10 +2,12 @@
 +nav("Guffaw", "dropdown_menu")
     +nav_item( "/" ) Home
     +nav_item( "/dexter" ) Dexter
+    +nav_item( "/canvas" ) Canvas
     +nav_item_dropdown( "#" )( label="Games")
         +nav_item( "/game/space" ) Space: Intension
         +nav_item( "/impactjs" ) ImpactJs
         +nav_item( "/phaser" ) Phaser
+        +nav_item( "/three" ) Three
     if(user)
         if(user['role'] === "Admin")
             +nav_item( "/admin" ) Admin

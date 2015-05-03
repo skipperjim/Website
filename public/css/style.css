@@ -1,11 +1,17 @@
-/*html {
-    background: url(/images/dexter_background_04.jpg) no-repeat center center fixed;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-    //overflow: hidden;
-}*/
+html,
+body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+nav.navbar.navbar-default,
+footer {
+    padding: 0 !important;
+    margin: 0 !important;
+}
 
 body {
     font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
@@ -73,7 +79,6 @@ div#chatoutput {
     margin: 0 none;
     overflow-y: scroll;
 }
-
 /*div#chatInputGroup * {
     display: inline;
 }*/

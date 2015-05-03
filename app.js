@@ -23,7 +23,9 @@ var session = require('express-session');
 var MongoStore = require('connect-mongo')(session);
 
 var routes = require('./routes/index');
+var canvas = require('./routes/canvas');
 var game = require('./routes/game');
+var three = require('./routes/three');
 var phaser = require('./routes/phaser');
 var impactjs = require('./routes/impactjs');
 var dexter = require('./routes/dexter');
@@ -89,7 +91,9 @@ app.use(function (req, res, next) {
 });
 
 app.use('/', routes);
+app.use('/canvas', canvas);
 app.use('/game', game);
+app.use('/three', three);
 app.use('/phaser', phaser);
 app.use('/impactjs', impactjs);
 app.use('/dexter', dexter);
