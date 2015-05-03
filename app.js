@@ -25,7 +25,7 @@ var MongoStore = require('connect-mongo')(session);
 var routes = require('./routes/index');
 var game = require('./routes/game');
 var phaser = require('./routes/phaser');
-var phaser = require('./routes/apartment');
+var impactjs = require('./routes/impactjs');
 var dexter = require('./routes/dexter');
 var admin = require('./routes/admin');
 var users = require('./routes/users');
@@ -91,7 +91,7 @@ app.use(function (req, res, next) {
 app.use('/', routes);
 app.use('/game', game);
 app.use('/phaser', phaser);
-app.use('/apartment', phaser);
+app.use('/impactjs', impactjs);
 app.use('/dexter', dexter);
 app.use('/admin', admin);
 app.use('/users', users);

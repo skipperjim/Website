@@ -1,0 +1,9 @@
+extends layouts/layout
+
+block append head
+    style(src='css/impactjs.css')
+    script(src='impactlib/impact/impact.js')
+    script(src='impactlib/game/main.js')
+
+block content
+    canvas#canvas
