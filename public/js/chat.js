@@ -23,7 +23,7 @@ window.onload = function () {
 
     sendButton.onclick = sendMessage = function () {
         if (chatmsg.value == "") {
-            alert("Please type your name!");
+            alert("You gotta type a message");
         } else {
             var text = chatmsg.value;
             socket.emit('send', {
