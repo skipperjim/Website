@@ -3,8 +3,8 @@ var router = express.Router();
 
 /* GET admin panel view. */
 router.get('/', function (req, res, next) {
-    res.render('dexter', {
-        title: 'Dexter\'s Gallery',
+    res.render('phaser', {
+        title: 'Phaser Game',
         user: req.user
     });
 });
