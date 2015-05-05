@@ -59,6 +59,11 @@ io.sockets.on('connection', function (socket) {
         socket.broadcast.emit('newPlayer', playerName);
     });
 
+    socket.on('broadcastMyPlayer', function (playerName) {
+        console.log(playerName + " broadcasting to other players");
+        socket.broadcast.emit('otherPlayer', playerName);
+    });
+
     socket.emit('message', {
         message: 'Welcome to the chatroom'
     });
