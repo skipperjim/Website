@@ -52,14 +52,23 @@ var io = require('socket.io').listen(app.listen(3700));
 console.log("Listening on ports 80, 443, 3700");
 
 io.sockets.on('connection', function (socket) {
-    console.log(session.user);
+    console.log("io.sockets server connection");
+
+    socket.on('playerJoined', function (playerName) {
+        console.log(playerName + " joined the game");
+        socket.broadcast.emit('newPlayer', playerName);
+    });
+
     socket.emit('message', {
         message: 'Welcome to the chatroom'
     });
     socket.on('send', function (data) {
         io.sockets.emit('message', data);
     });
+
 });
+
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

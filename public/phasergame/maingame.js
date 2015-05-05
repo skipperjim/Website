@@ -1,4 +1,4 @@
-var game = new Phaser.Game(800, 600, Phaser.AUTO, '', {
+game = new Phaser.Game(800, 600, Phaser.AUTO, '', {
     preload: preload,
     create: create,
     update: update
@@ -24,8 +24,8 @@ function create() {
     // Add sprite to game world
     sprite = game.add.sprite(game.world.centerX, game.world.centerY, 'Link');
     sprite.anchor.setTo(0.5, 0.5);
-    sprite.scale.x = 2.0;
-    sprite.scale.y = 2.0;
+    sprite.scale.x = 1.7;
+    sprite.scale.y = 1.7;
 
     //  This will force it to decelerate and limit its speed
     game.physics.enable(sprite, Phaser.Physics.ARCADE);
@@ -79,9 +79,9 @@ function update() {
         if (facing != 'idle') {
             sprite.animations.stop();
             if (facing == 'up') {
-                sprite.frame = 0;
+                sprite.frame = 3;
             } else if (facing == 'down') {
-                sprite.frame = 9;
+                sprite.frame = 12;
             } else if (facing == 'left') {
                 sprite.frame = 19;
             } else if (facing == 'right') {
