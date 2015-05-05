@@ -38,8 +38,8 @@ function create() {
     // Idle animations
     sprite.animations.add('idleup', [0], 10, true);
     sprite.animations.add('idledown', [9], 10, true);
-    sprite.animations.add('idleleft', [18], 10, true);
-    sprite.animations.add('idleright', [28], 10, true);
+    sprite.animations.add('idleleft', [19], 10, true);
+    sprite.animations.add('idleright', [25], 10, true);
 
     sprite.bringToTop();
 
@@ -83,9 +83,9 @@ function update() {
             } else if (facing == 'down') {
                 sprite.frame = 9;
             } else if (facing == 'left') {
-                sprite.frame = 18;
+                sprite.frame = 19;
             } else if (facing == 'right') {
-                sprite.frame = 28;
+                sprite.frame = 25;
             }
             facing = 'idle';
         }
